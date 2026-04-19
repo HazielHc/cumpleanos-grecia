@@ -1,0 +1,4 @@
+*.log
+server.ps1
+cloudflared*
+tunnel*
