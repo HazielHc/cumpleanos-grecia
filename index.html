@@ -7,48 +7,44 @@
   <meta name="description" content="Cuenta regresiva elegante para el Cumpleaños Grecia el 14 de mayo de 2026.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Jost:wght@200;300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-ivory: #f9f8f5;
-      --bg-off: #f0eeea;
-      --sage-soft: #c4d4c8;
-      --sage-light: #dce8df;
-      --sage-deep: #4a6e55;
-      --mist-light: #d8e8f0;
-      --mist-mid: #b8cdd8;
-      --fog-blue: #6e9aad;
-      --text-main: #2c3830;
-      --text-muted: #7a9080;
-      --text-soft: #a8bfb2;
-      --line-soft: rgba(255, 255, 255, 0.55);
-      --glass-fill: rgba(255, 255, 255, 0.26);
-      --glass-strong: rgba(255, 255, 255, 0.38);
-      --shadow: 0 24px 60px rgba(74, 110, 85, 0.12);
-      --radius-xl: 30px;
-      --radius-lg: 22px;
-      --radius-md: 18px;
-      --max-card: 880px;
+      --ivory: #f8f7f2;
+      --off: #f2f0ea;
+      --mist: #dce9ef;
+      --mist-deep: #8fa9b8;
+      --sage: #dce8df;
+      --sage-mid: #b7caa7;
+      --sage-deep: #56724f;
+      --text: #2e3831;
+      --muted: #8b958c;
+      --line: rgba(160, 183, 196, 0.42);
+      --glass: rgba(255, 255, 255, 0.28);
+      --glass-strong: rgba(255, 255, 255, 0.36);
+      --shadow: 0 18px 56px rgba(95, 121, 104, 0.12);
+      --mobile-width: 430px;
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       margin: 0;
       min-height: 100%;
     }
 
     body {
       font-family: "Jost", sans-serif;
-      color: var(--text-main);
+      color: var(--text);
       background:
-        radial-gradient(circle at 15% 20%, rgba(220, 232, 223, 0.9), transparent 32%),
-        radial-gradient(circle at 85% 18%, rgba(216, 232, 240, 0.75), transparent 30%),
-        radial-gradient(circle at 70% 78%, rgba(196, 212, 200, 0.65), transparent 26%),
-        linear-gradient(135deg, var(--bg-ivory) 0%, #f6f4ef 24%, var(--sage-light) 55%, var(--mist-light) 100%);
-      overflow: hidden;
+        radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.92), transparent 28%),
+        radial-gradient(circle at 80% 14%, rgba(220, 233, 239, 0.78), transparent 30%),
+        radial-gradient(circle at 52% 74%, rgba(201, 220, 198, 0.64), transparent 32%),
+        linear-gradient(180deg, #f9f8f4 0%, #eef4f4 46%, #dce9ef 100%);
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
@@ -58,14 +54,14 @@
       min-height: 100vh;
       display: grid;
       place-items: center;
-      padding: clamp(18px, 3vw, 34px);
+      padding: 22px;
       isolation: isolate;
     }
 
     .backdrop {
       position: fixed;
       inset: 0;
-      z-index: -2;
+      z-index: -3;
       pointer-events: none;
     }
 
@@ -74,352 +70,428 @@
       content: "";
       position: absolute;
       border-radius: 50%;
-      filter: blur(28px);
-      opacity: 0.55;
+      filter: blur(42px);
+      opacity: 0.48;
     }
 
     .backdrop::before {
-      width: min(42vw, 320px);
-      height: min(42vw, 320px);
-      left: -4%;
+      width: 34vw;
+      height: 34vw;
+      max-width: 320px;
+      max-height: 320px;
       top: 6%;
-      background: rgba(184, 205, 216, 0.28);
+      right: 2%;
+      background: rgba(214, 231, 239, 0.48);
     }
 
     .backdrop::after {
-      width: min(36vw, 280px);
-      height: min(36vw, 280px);
-      right: -6%;
-      bottom: 8%;
-      background: rgba(196, 212, 200, 0.34);
+      width: 44vw;
+      height: 44vw;
+      max-width: 360px;
+      max-height: 360px;
+      bottom: 10%;
+      left: 10%;
+      background: rgba(197, 219, 190, 0.34);
     }
 
-    .botanicals {
+    .florals {
       position: fixed;
       inset: 0;
-      z-index: -1;
-      width: 100%;
-      height: 100%;
+      z-index: -2;
       pointer-events: none;
+      overflow: hidden;
     }
 
-    .botanicals path,
-    .botanicals circle,
-    .botanicals ellipse,
-    .botanicals line {
-      vector-effect: non-scaling-stroke;
+    .flower {
+      position: absolute;
+      opacity: 0.95;
+      filter: drop-shadow(0 18px 18px rgba(105, 131, 96, 0.12));
+      transform-origin: center;
     }
 
-    .botanicals .bouquet {
-      opacity: 0.42;
-      transform-origin: center bottom;
+    .flower svg {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
-    .botanicals .petal {
-      stroke: rgba(201, 209, 214, 0.8);
-      stroke-width: 1.2;
-      stroke-linejoin: round;
+    .flower-top-right {
+      width: 168px;
+      right: 18px;
+      top: 30px;
+      transform: rotate(3deg);
     }
 
-    .botanicals .leaf,
-    .botanicals .stem {
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .flower-left-mid {
+      width: 118px;
+      left: -10px;
+      top: 250px;
+      transform: rotate(-12deg);
+      opacity: 0.92;
+    }
+
+    .flower-bottom-left {
+      width: 132px;
+      left: -12px;
+      bottom: 100px;
+      transform: rotate(-8deg);
+    }
+
+    .flower-bottom-right {
+      width: 156px;
+      right: -8px;
+      bottom: 56px;
+      transform: rotate(4deg);
     }
 
     .card {
-      width: min(100%, var(--max-card));
-      padding: clamp(24px, 4vw, 44px);
-      border-radius: var(--radius-xl);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.19));
-      border: 1px solid rgba(255, 255, 255, 0.48);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(22px) saturate(125%);
-      -webkit-backdrop-filter: blur(22px) saturate(125%);
-      text-align: center;
+      width: min(100%, var(--mobile-width));
+      padding: 34px 20px 28px;
+      border-radius: 34px;
       position: relative;
       overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.19)),
+        linear-gradient(140deg, rgba(248, 247, 242, 0.66), rgba(216, 233, 239, 0.5));
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px) saturate(120%);
+      -webkit-backdrop-filter: blur(20px) saturate(120%);
+      text-align: center;
     }
 
     .card::before {
       content: "";
       position: absolute;
       inset: 1px;
-      border-radius: calc(var(--radius-xl) - 1px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 33px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      pointer-events: none;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: auto 10% 12% 10%;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(191, 213, 183, 0.24), transparent 68%);
+      filter: blur(30px);
       pointer-events: none;
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(18px);
-      animation: rise-in 900ms cubic-bezier(.2, .7, .2, 1) forwards;
+      transform: translateY(16px);
+      animation: rise 900ms cubic-bezier(.2, .7, .2, 1) forwards;
     }
 
     .delay-1 { animation-delay: 120ms; }
-    .delay-2 { animation-delay: 230ms; }
-    .delay-3 { animation-delay: 340ms; }
-    .delay-4 { animation-delay: 450ms; }
-    .delay-5 { animation-delay: 560ms; }
-    .delay-6 { animation-delay: 670ms; }
-
-    .eyebrow {
-      margin: 18px 0 0;
-      font-size: 0.8rem;
-      font-weight: 300;
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
-      color: var(--fog-blue);
-      padding-left: 0.5em;
-    }
+    .delay-2 { animation-delay: 210ms; }
+    .delay-3 { animation-delay: 320ms; }
+    .delay-4 { animation-delay: 430ms; }
+    .delay-5 { animation-delay: 540ms; }
+    .delay-6 { animation-delay: 650ms; }
 
     h1 {
-      margin: 0;
+      margin: 6px 0 0;
       font-family: "Cormorant Garamond", serif;
-      font-size: clamp(3rem, 7vw, 5.7rem);
+      font-size: clamp(3.35rem, 12vw, 4.85rem);
       line-height: 0.92;
       font-weight: 300;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.01em;
     }
 
     .subtitle {
-      margin: 12px 0 0;
+      margin: 14px 0 0;
       font-family: "Cormorant Garamond", serif;
-      font-size: clamp(1.25rem, 2.8vw, 1.8rem);
+      font-size: 1.95rem;
       font-style: italic;
       font-weight: 300;
-      color: var(--text-muted);
+      color: rgba(112, 124, 118, 0.9);
+    }
+
+    .eyebrow {
+      margin: 18px 0 0;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.46em;
+      text-transform: uppercase;
+      color: var(--mist-deep);
+      padding-left: 0.46em;
     }
 
     .divider {
       display: flex;
       align-items: center;
-      gap: 14px;
       justify-content: center;
-      margin: 22px auto 26px;
-      color: rgba(110, 154, 173, 0.7);
+      gap: 14px;
+      margin: 20px 0 24px;
+      color: rgba(143, 169, 184, 0.82);
     }
 
     .divider::before,
     .divider::after {
       content: "";
-      width: min(22vw, 124px);
+      width: min(30vw, 126px);
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(110, 154, 173, 0.45), transparent);
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
     }
 
     .divider svg {
-      width: 22px;
-      height: 22px;
+      width: 17px;
+      height: 17px;
       stroke: currentColor;
       fill: none;
       stroke-width: 1;
-      opacity: 0.85;
     }
 
     .countdown {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: clamp(10px, 2vw, 18px);
-      margin: 0 auto 28px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 0 0 24px;
     }
 
     .time-card {
-      background: linear-gradient(180deg, var(--glass-strong), rgba(255, 255, 255, 0.17));
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      border-radius: var(--radius-lg);
-      padding: clamp(14px, 2vw, 20px) 10px;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
-      min-height: 136px;
+      min-height: 140px;
       display: grid;
       place-items: center;
       align-content: center;
-      gap: 8px;
+      gap: 10px;
+      padding: 18px 10px;
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.16));
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .value {
       font-family: "Cormorant Garamond", serif;
-      font-size: clamp(2.7rem, 6vw, 4.4rem);
-      line-height: 0.9;
+      font-size: clamp(3.45rem, 12vw, 4.2rem);
+      line-height: 0.86;
       font-weight: 300;
+      letter-spacing: 0.03em;
       font-variant-numeric: tabular-nums lining-nums;
-      letter-spacing: 0.025em;
     }
 
     .label {
-      font-size: 0.72rem;
+      font-size: 0.9rem;
       font-weight: 300;
       letter-spacing: 0.34em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: rgba(115, 126, 121, 0.94);
       padding-left: 0.34em;
     }
 
     .progress-wrap {
-      width: min(100%, 520px);
+      width: 100%;
       margin: 0 auto;
     }
 
     .progress-track {
-      width: 100%;
-      height: 8px;
+      height: 10px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.44);
+      border: 1px solid rgba(255, 255, 255, 0.62);
       overflow: hidden;
-      box-shadow: inset 0 1px 2px rgba(44, 56, 48, 0.04);
     }
 
     .progress-bar {
       width: 0%;
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, rgba(138, 170, 146, 0.95), rgba(110, 154, 173, 0.95));
-      box-shadow: 0 0 22px rgba(110, 154, 173, 0.22);
+      background: linear-gradient(90deg, rgba(112, 146, 132, 0.95), rgba(132, 171, 193, 0.95));
       transition: width 900ms ease;
+      box-shadow: 0 0 18px rgba(143, 169, 184, 0.22);
     }
 
     .progress-copy {
-      margin: 12px 0 0;
       display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      font-size: 0.82rem;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
+      justify-content: center;
+      margin-top: 12px;
+      font-size: 0.94rem;
+      color: rgba(120, 133, 126, 0.92);
+      letter-spacing: 0.08em;
     }
 
-    .progress-copy span:first-child:empty {
+    .progress-copy span:first-child {
       display: none;
     }
 
     .message {
-      margin: 24px auto 0;
-      max-width: 28ch;
+      margin: 18px auto 0;
+      max-width: 16ch;
       font-family: "Cormorant Garamond", serif;
-      font-size: clamp(1.45rem, 3.2vw, 2rem);
-      line-height: 1.15;
+      font-size: clamp(2.05rem, 7vw, 2.6rem);
+      line-height: 1.02;
       font-style: italic;
-      color: var(--sage-deep);
+      color: rgba(68, 95, 73, 0.96);
     }
 
     .date-badge {
-      margin: 28px auto 0;
       width: fit-content;
       max-width: 100%;
-      padding: 10px 18px;
+      margin: 28px auto 0;
+      padding: 12px 24px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.52);
-      background: rgba(255, 255, 255, 0.24);
-      color: var(--text-muted);
-      letter-spacing: 0.22em;
+      background: rgba(255, 255, 255, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      color: rgba(120, 129, 122, 0.94);
+      font-size: 0.88rem;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
-      font-size: 0.74rem;
       white-space: nowrap;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .footer-note {
       margin-top: 12px;
-      color: rgba(122, 144, 128, 0.9);
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       letter-spacing: 0.04em;
+      color: rgba(120, 133, 126, 0.76);
     }
 
-    @keyframes rise-in {
+    @keyframes rise {
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    @media (max-width: 860px) {
-      .card {
-        max-width: 720px;
-      }
-
-      .countdown {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .time-card {
-        min-height: 124px;
-      }
-    }
-
-    @media (max-width: 560px) {
-      body {
-        overflow: auto;
-      }
-
+    @media (min-width: 720px) {
       .scene {
-        min-height: 100dvh;
-        padding: 16px;
+        padding: 36px;
       }
 
       .card {
-        padding: 22px 16px 20px;
-        border-radius: 24px;
+        width: min(100%, 760px);
+        padding: 52px 44px 36px;
       }
 
-      .eyebrow {
-        margin-top: 14px;
-        font-size: 0.72rem;
-        letter-spacing: 0.38em;
+      h1 {
+        font-size: clamp(4.8rem, 9vw, 6.5rem);
       }
 
       .subtitle {
-        margin-top: 10px;
+        font-size: 2.1rem;
       }
 
-      .divider {
-        margin: 18px auto 20px;
-        gap: 10px;
+      .eyebrow {
+        font-size: 0.9rem;
+        margin-top: 20px;
       }
 
       .countdown {
-        gap: 10px;
-        margin-bottom: 22px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        margin-bottom: 26px;
       }
 
       .time-card {
-        min-height: 108px;
-        padding: 14px 8px;
-        border-radius: 18px;
+        min-height: 172px;
       }
 
-      .label {
-        font-size: 0.64rem;
-        letter-spacing: 0.26em;
-      }
-
-      .progress-copy {
-        flex-direction: column;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .botanicals {
-        transform: scale(1.08);
-        transform-origin: center bottom;
+      .value {
+        font-size: clamp(4rem, 7vw, 5rem);
       }
 
       .message {
-        margin-top: 18px;
-        max-width: 22ch;
+        max-width: 26ch;
+        font-size: 2.1rem;
+      }
+
+      .flower-top-right {
+        width: 230px;
+        right: 54px;
+        top: 18px;
+      }
+
+      .flower-left-mid {
+        width: 146px;
+        left: 14px;
+        top: 250px;
+      }
+
+      .flower-bottom-left {
+        width: 170px;
+        left: 42px;
+        bottom: 54px;
+      }
+
+      .flower-bottom-right {
+        width: 210px;
+        right: 24px;
+        bottom: 28px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .scene {
+        padding: 14px;
+      }
+
+      .card {
+        padding: 26px 16px 24px;
+        border-radius: 28px;
+      }
+
+      .card::before {
+        border-radius: 27px;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 15vw, 4rem);
+      }
+
+      .subtitle {
+        font-size: 1.65rem;
+      }
+
+      .eyebrow {
+        font-size: 0.82rem;
+      }
+
+      .time-card {
+        min-height: 128px;
+        border-radius: 21px;
+      }
+
+      .label {
+        font-size: 0.78rem;
       }
 
       .date-badge {
-        margin-top: 22px;
-        font-size: 0.68rem;
-        letter-spacing: 0.18em;
-        white-space: normal;
+        font-size: 0.78rem;
+        letter-spacing: 0.2em;
       }
 
-      .footer-note {
-        font-size: 0.74rem;
+      .flower-top-right {
+        width: 146px;
+        right: 0;
+        top: 52px;
+      }
+
+      .flower-left-mid {
+        width: 98px;
+        left: -18px;
+        top: 246px;
+      }
+
+      .flower-bottom-left {
+        width: 114px;
+        left: -18px;
+        bottom: 110px;
+      }
+
+      .flower-bottom-right {
+        width: 138px;
+        right: -18px;
+        bottom: 44px;
       }
     }
 
@@ -439,96 +511,100 @@
 <body>
   <div class="backdrop" aria-hidden="true"></div>
 
-  <svg class="botanicals" viewBox="0 0 1600 1000" preserveAspectRatio="none" aria-hidden="true">
-    <defs>
-      <linearGradient id="petalWhite" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="rgba(255,255,255,0.9)" />
-        <stop offset="55%" stop-color="rgba(250,249,245,0.82)" />
-        <stop offset="100%" stop-color="rgba(220,228,232,0.5)" />
-      </linearGradient>
-      <linearGradient id="petalWarm" x1="0" y1="0" x2="0.9" y2="1">
-        <stop offset="0%" stop-color="rgba(255,255,255,0.88)" />
-        <stop offset="68%" stop-color="rgba(245,242,236,0.7)" />
-        <stop offset="100%" stop-color="rgba(227,205,163,0.36)" />
-      </linearGradient>
-      <linearGradient id="leafGreen" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="rgba(178,201,106,0.74)" />
-        <stop offset="55%" stop-color="rgba(105,144,73,0.62)" />
-        <stop offset="100%" stop-color="rgba(57,93,50,0.58)" />
-      </linearGradient>
-      <linearGradient id="stemGreen" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="rgba(134,172,85,0.76)" />
-        <stop offset="100%" stop-color="rgba(59,97,56,0.62)" />
-      </linearGradient>
-      <filter id="petalBlur" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="1.2" />
-      </filter>
-    </defs>
+  <div class="florals" aria-hidden="true">
+    <div class="flower flower-top-right">
+      <svg viewBox="0 0 220 320">
+        <defs>
+          <linearGradient id="callaPetal" x1="0.1" y1="0.06" x2="0.82" y2="0.92">
+            <stop offset="0%" stop-color="#fffef9"/>
+            <stop offset="48%" stop-color="#f7f4ee"/>
+            <stop offset="100%" stop-color="#dddeda"/>
+          </linearGradient>
+          <linearGradient id="callaStem" x1="0.4" y1="0" x2="0.6" y2="1">
+            <stop offset="0%" stop-color="#a7be61"/>
+            <stop offset="100%" stop-color="#678948"/>
+          </linearGradient>
+        </defs>
+        <path d="M145 314c8-81 7-157-6-226 6-16 15-30 28-45 8 56 14 112 13 173-1 39-6 72-15 98z" fill="url(#callaStem)" opacity="0.92"/>
+        <path d="M140 34c34 6 57 27 68 63-31 5-54 18-71 39-24 28-34 62-36 102-34-35-53-71-54-110-2-52 34-90 93-94z" fill="url(#callaPetal)"/>
+        <path d="M135 35c-25 20-37 42-36 67 1 26 10 51 31 78" fill="none" stroke="rgba(185,186,179,0.65)" stroke-width="2.2"/>
+        <path d="M155 45c14 11 22 23 25 36" fill="none" stroke="rgba(188,171,121,0.4)" stroke-width="2"/>
+        <path d="M188 122c-18-1-31 4-41 14" fill="none" stroke="rgba(201,184,135,0.45)" stroke-width="1.7"/>
+      </svg>
+    </div>
 
-    <g class="bouquet">
-      <path class="leaf" d="M435 870c-92 6-169 32-248 92 53-103 130-169 237-199 43-11 80-16 116-15-24 42-56 80-105 122z" fill="url(#leafGreen)" stroke="rgba(112,145,70,0.42)" stroke-width="1.4" opacity="0.7" />
-      <path class="leaf" d="M567 903c-48-82-85-166-104-255 67 33 118 87 156 160 22 42 36 83 41 128-35-5-66-15-93-33z" fill="url(#leafGreen)" stroke="rgba(75,109,58,0.38)" stroke-width="1.3" opacity="0.68" />
-      <path class="leaf" d="M928 896c24-93 60-181 118-261 29 59 39 118 28 182-12 68-43 123-91 170-30-30-48-62-55-91z" fill="url(#leafGreen)" stroke="rgba(70,104,56,0.4)" stroke-width="1.3" opacity="0.7" />
-      <path class="leaf" d="M1117 855c72-39 149-62 239-70-60 77-133 125-227 145-41 8-76 11-109 6 21-33 52-60 97-81z" fill="url(#leafGreen)" stroke="rgba(97,130,65,0.36)" stroke-width="1.2" opacity="0.66" />
+    <div class="flower flower-left-mid">
+      <svg viewBox="0 0 160 180">
+        <defs>
+          <radialGradient id="ranunculusBloom" cx="50%" cy="48%" r="52%">
+            <stop offset="0%" stop-color="#fffefb"/>
+            <stop offset="44%" stop-color="#f7f4ec"/>
+            <stop offset="100%" stop-color="#d9dbd4"/>
+          </radialGradient>
+        </defs>
+        <g opacity="0.96">
+          <circle cx="64" cy="60" r="46" fill="url(#ranunculusBloom)"/>
+          <circle cx="35" cy="118" r="30" fill="url(#ranunculusBloom)"/>
+          <path d="M64 24c-24 3-39 20-41 42 15-10 29-14 44-10-10 9-14 20-14 34 14-10 28-15 43-13-8 11-10 23-7 36 11-9 22-14 35-15-2-14 1-27 10-38-14 1-25-3-35-11 14-7 23-18 28-34-15 3-27 8-37 17-5-14-13-26-26-36z" fill="none" stroke="rgba(221,221,214,0.78)" stroke-width="1.6"/>
+          <path d="M34 96c-15 2-25 12-27 27 10-7 19-9 29-6-6 7-8 14-7 22 10-6 19-8 28-7-5 7-7 15-4 23 7-6 14-9 23-10-2-8 0-16 6-23-9 0-16-2-23-7 9-4 15-11 19-21-9 2-18 5-25 11-3-9-8-17-19-23z" fill="none" stroke="rgba(220,219,211,0.74)" stroke-width="1.4"/>
+        </g>
+      </svg>
+    </div>
 
-      <path class="stem" d="M635 928c-7-139-4-261 9-366" stroke="url(#stemGreen)" stroke-width="13" opacity="0.55" />
-      <path class="stem" d="M720 934c-10-139-9-278 5-417" stroke="url(#stemGreen)" stroke-width="14" opacity="0.56" />
-      <path class="stem" d="M803 935c4-132 18-260 42-385" stroke="url(#stemGreen)" stroke-width="12" opacity="0.54" />
-      <path class="stem" d="M892 936c17-126 44-239 84-339" stroke="url(#stemGreen)" stroke-width="12" opacity="0.54" />
-      <path class="stem" d="M539 935c-13-111-37-209-78-294" stroke="url(#stemGreen)" stroke-width="10" opacity="0.5" />
-      <path class="stem" d="M1012 935c37-98 85-184 143-257" stroke="url(#stemGreen)" stroke-width="10" opacity="0.5" />
+    <div class="flower flower-bottom-left">
+      <svg viewBox="0 0 200 280">
+        <defs>
+          <linearGradient id="callaPetalSmall" x1="0.15" y1="0.08" x2="0.82" y2="0.88">
+            <stop offset="0%" stop-color="#fffef9"/>
+            <stop offset="56%" stop-color="#f5f1e9"/>
+            <stop offset="100%" stop-color="#d8d8d1"/>
+          </linearGradient>
+          <linearGradient id="callaStemSmall" x1="0.4" y1="0" x2="0.7" y2="1">
+            <stop offset="0%" stop-color="#afc66b"/>
+            <stop offset="100%" stop-color="#6d9250"/>
+          </linearGradient>
+        </defs>
+        <path d="M78 274c13-72 36-138 74-194 10 46 11 89 3 129-10 28-27 49-50 65z" fill="url(#callaStemSmall)" opacity="0.92"/>
+        <path d="M102 56c31 5 54 22 67 52-28 6-48 18-62 37-20 25-30 54-35 89C43 205 27 174 26 140c-1-45 28-79 76-84z" fill="url(#callaPetalSmall)"/>
+        <path d="M95 61c-19 15-30 34-31 57 0 23 7 43 22 65" fill="none" stroke="rgba(182,184,176,0.64)" stroke-width="2"/>
+      </svg>
+    </div>
 
-      <g transform="translate(468 530) rotate(-21)">
-        <path class="petal" d="M0 0c-31-58-34-117-8-176 34 24 55 59 65 106 9 41 7 82-7 122-16-10-33-27-50-52z" fill="url(#petalWhite)" />
-        <path class="petal" d="M10 -8c36-46 81-75 136-83 9 57-7 108-47 153-25 29-56 49-93 60-9-41-8-84 4-130z" fill="url(#petalWarm)" />
-        <path class="petal" d="M30 6c55-16 108-12 159 15-20 53-58 88-114 104-37 11-74 12-113 2 13-44 36-84 68-121z" fill="url(#petalWhite)" />
-        <path d="M51 -106c10 47 12 97 3 150M24 4c44 10 88 11 131 3" stroke="rgba(220,190,142,0.42)" stroke-width="1.15" fill="none" opacity="0.72" />
-      </g>
-
-      <g transform="translate(676 362) rotate(-6)">
-        <path class="petal" d="M0 0c-24-68-17-131 22-190 38 33 58 79 61 136 2 44-8 86-31 126-22-14-40-38-52-72z" fill="url(#petalWhite)" />
-        <path class="petal" d="M20 10c42-53 95-83 161-90 8 67-14 124-65 174-31 31-69 50-113 60-9-48-3-96 17-144z" fill="url(#petalWarm)" />
-        <path class="petal" d="M46 18c53-17 107-16 161 5-15 56-49 98-104 123-37 17-76 22-117 17 8-49 29-97 60-145z" fill="url(#petalWhite)" />
-        <path d="M79 -123c13 49 16 105 7 167M40 19c46 11 92 11 140 2" stroke="rgba(222,195,151,0.46)" stroke-width="1.15" fill="none" opacity="0.74" />
-      </g>
-
-      <g transform="translate(848 470) rotate(4)">
-        <path class="petal" d="M0 0c-18-60-10-115 24-166 33 30 50 71 53 122 2 38-6 75-25 111-20-12-37-34-52-67z" fill="url(#petalWhite)" />
-        <path class="petal" d="M18 8c37-48 84-76 142-82 8 59-10 110-56 153-28 26-62 43-101 51-7-42-2-82 15-122z" fill="url(#petalWarm)" />
-        <path class="petal" d="M43 16c48-15 96-14 145 5-12 49-42 86-92 108-33 15-68 19-105 15 8-42 25-85 52-128z" fill="url(#petalWhite)" />
-        <ellipse cx="79" cy="43" rx="13" ry="10" fill="rgba(190,163,108,0.58)" />
-        <path d="M75 12c0 29-2 55-6 79M90 8c4 29 5 57 4 83M103 16c7 25 12 49 13 73" stroke="rgba(145,109,39,0.82)" stroke-width="3.1" fill="none" stroke-linecap="round" opacity="0.9" />
-      </g>
-
-      <g transform="translate(1012 338) rotate(8)">
-        <path class="petal" d="M0 0c-25-70-19-136 19-198 40 31 62 78 68 138 4 46-5 91-28 133-25-15-44-40-59-73z" fill="url(#petalWhite)" />
-        <path class="petal" d="M23 5c44-56 100-89 170-97 9 68-13 128-67 181-33 32-73 54-120 64-8-49-2-98 17-148z" fill="url(#petalWhite)" />
-        <path class="petal" d="M57 14c57-19 114-17 172 6-15 60-52 103-112 130-40 18-81 24-125 18 9-53 30-105 65-154z" fill="url(#petalWarm)" />
-        <path d="M91 -128c15 52 19 110 10 173M53 11c49 12 99 12 149 2" stroke="rgba(221,195,150,0.42)" stroke-width="1.12" fill="none" opacity="0.72" />
-      </g>
-
-      <g transform="translate(1112 596) rotate(17)">
-        <path class="petal" d="M0 0c-22-51-20-103 5-155 33 21 56 54 69 96 10 31 12 63 3 95-21-7-46-20-77-36z" fill="url(#petalWhite)" />
-        <path class="petal" d="M18 -4c38-37 82-57 131-61 5 50-13 93-51 129-24 22-52 38-84 47-7-35-6-73 4-115z" fill="url(#petalWarm)" />
-        <path class="petal" d="M26 16c45-6 86 4 124 31-19 40-52 64-98 72-30 6-59 3-87-8 12-34 33-66 61-95z" fill="url(#petalWhite)" />
-      </g>
-
-      <g transform="translate(604 808)" opacity="0.38" filter="url(#petalBlur)">
-        <ellipse cx="0" cy="0" rx="300" ry="68" fill="rgba(156,181,122,0.18)" />
-      </g>
-    </g>
-  </svg>
+    <div class="flower flower-bottom-right">
+      <svg viewBox="0 0 220 260">
+        <defs>
+          <radialGradient id="ranunculusLarge" cx="50%" cy="50%" r="52%">
+            <stop offset="0%" stop-color="#fffefc"/>
+            <stop offset="50%" stop-color="#f6f2ea"/>
+            <stop offset="100%" stop-color="#d8d9d2"/>
+          </radialGradient>
+          <linearGradient id="ranunculusStem" x1="0.5" y1="0" x2="0.5" y2="1">
+            <stop offset="0%" stop-color="#aec76b"/>
+            <stop offset="100%" stop-color="#739452"/>
+          </linearGradient>
+        </defs>
+        <path d="M62 256c3-45 6-88 8-130" stroke="url(#ranunculusStem)" stroke-width="5" fill="none"/>
+        <path d="M123 256c-2-54-1-103 7-145" stroke="url(#ranunculusStem)" stroke-width="5" fill="none"/>
+        <path d="M170 256c6-49 11-92 26-128" stroke="url(#ranunculusStem)" stroke-width="5" fill="none"/>
+        <circle cx="64" cy="108" r="36" fill="url(#ranunculusLarge)"/>
+        <circle cx="130" cy="90" r="48" fill="url(#ranunculusLarge)"/>
+        <circle cx="184" cy="132" r="30" fill="url(#ranunculusLarge)"/>
+        <path d="M62 79c-18 2-30 14-33 31 11-7 22-10 33-7-7 7-11 15-10 25 10-6 21-9 32-8-6 8-8 17-6 26 9-6 17-9 26-10-2-10 1-18 8-27-10 1-18-2-25-7 11-5 17-12 22-23-10 2-19 6-28 13-3-10-9-18-19-24z" fill="none" stroke="rgba(220,219,211,0.78)" stroke-width="1.4"/>
+        <path d="M130 42c-22 2-38 17-41 39 14-9 28-12 42-8-9 9-13 20-12 33 13-8 27-12 41-10-8 10-10 21-7 34 11-8 22-12 33-12-1-12 2-24 11-35-13 1-23-2-32-9 13-6 21-16 27-30-13 2-24 7-35 15-5-13-12-24-27-30z" fill="none" stroke="rgba(221,219,212,0.78)" stroke-width="1.55"/>
+      </svg>
+    </div>
+  </div>
 
   <main class="scene">
     <section class="card" aria-label="Cuenta regresiva para el Cumpleaños Grecia">
       <h1 class="reveal delay-1">Cumpleaños<br>Grecia</h1>
       <p class="subtitle reveal delay-2">14 de mayo, 2026</p>
-      <p class="eyebrow reveal">faltan</p>
+      <p class="eyebrow reveal delay-2">faltan</p>
 
       <div class="divider reveal delay-3" aria-hidden="true">
         <svg viewBox="0 0 24 24">
-          <path d="M12 4c1.2 2.2 3.1 3.8 5.7 4.9-2.7.6-4.4 2.1-5.5 4.3-1-2.1-2.8-3.6-5.3-4.3C9.4 7.7 11.1 6.1 12 4Z" />
-          <path d="M12 13.2c.7 1.3 1.8 2.3 3.2 2.9-1.4.3-2.5 1.1-3.1 2.4-.6-1.2-1.7-2-3-2.4 1.5-.6 2.5-1.6 2.9-2.9Z" />
+          <path d="M12 4c1.1 2.3 2.9 4 5.4 4.9-2.5.6-4.1 2-5 4.2-.9-2.2-2.5-3.6-4.9-4.2C9.7 8 11.2 6.3 12 4Z"></path>
+          <path d="M12 13.1c.6 1.3 1.6 2.2 3 2.8-1.4.3-2.3 1-2.9 2.2-.6-1.2-1.6-1.9-2.9-2.2 1.3-.6 2.3-1.5 2.8-2.8Z"></path>
         </svg>
       </div>
 
@@ -674,7 +750,7 @@
         footerNote.textContent = message.footer;
 
         if (distance <= 0) {
-          parts.days.textContent = "000";
+          parts.days.textContent = "0";
           parts.hours.textContent = "00";
           parts.minutes.textContent = "00";
           parts.seconds.textContent = "00";
