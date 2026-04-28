@@ -97,51 +97,51 @@
     .florals {
       position: fixed;
       inset: 0;
-      z-index: -2;
+      z-index: 1;
       pointer-events: none;
       overflow: hidden;
     }
 
     .flower {
       position: absolute;
-      opacity: 0.95;
-      filter: drop-shadow(0 18px 18px rgba(105, 131, 96, 0.12));
+      opacity: 0.98;
+      filter: drop-shadow(0 16px 24px rgba(91, 113, 82, 0.16));
       transform-origin: center;
     }
 
-    .flower svg {
+    .flower img {
       display: block;
       width: 100%;
       height: auto;
+      user-select: none;
     }
 
     .flower-top-right {
-      width: 168px;
-      right: 18px;
-      top: 30px;
-      transform: rotate(3deg);
+      width: 174px;
+      right: -4px;
+      top: 20px;
+      transform: rotate(4deg);
     }
 
     .flower-left-mid {
-      width: 118px;
-      left: -10px;
-      top: 250px;
-      transform: rotate(-12deg);
-      opacity: 0.92;
+      width: 136px;
+      left: -52px;
+      top: 214px;
+      transform: rotate(-4deg);
     }
 
     .flower-bottom-left {
-      width: 132px;
-      left: -12px;
-      bottom: 100px;
-      transform: rotate(-8deg);
+      width: 142px;
+      left: -20px;
+      bottom: 114px;
+      transform: rotate(-8deg) scaleX(-1);
     }
 
     .flower-bottom-right {
-      width: 156px;
-      right: -8px;
-      bottom: 56px;
-      transform: rotate(4deg);
+      width: 186px;
+      right: -42px;
+      bottom: 8px;
+      transform: rotate(-1deg);
     }
 
     .card {
@@ -150,6 +150,7 @@
       border-radius: 34px;
       position: relative;
       overflow: hidden;
+      z-index: 0;
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.19)),
         linear-gradient(140deg, rgba(248, 247, 242, 0.66), rgba(216, 233, 239, 0.5));
@@ -178,6 +179,11 @@
       background: radial-gradient(circle, rgba(191, 213, 183, 0.24), transparent 68%);
       filter: blur(30px);
       pointer-events: none;
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 3;
     }
 
     .reveal {
@@ -406,27 +412,27 @@
       }
 
       .flower-top-right {
-        width: 230px;
-        right: 54px;
-        top: 18px;
+        width: 248px;
+        right: 24px;
+        top: 0;
       }
 
       .flower-left-mid {
-        width: 146px;
-        left: 14px;
-        top: 250px;
+        width: 196px;
+        left: 18px;
+        top: 210px;
       }
 
       .flower-bottom-left {
-        width: 170px;
-        left: 42px;
-        bottom: 54px;
+        width: 186px;
+        left: 40px;
+        bottom: 76px;
       }
 
       .flower-bottom-right {
-        width: 210px;
+        width: 236px;
         right: 24px;
-        bottom: 28px;
+        bottom: -6px;
       }
     }
 
@@ -471,27 +477,27 @@
       }
 
       .flower-top-right {
-        width: 146px;
-        right: 0;
-        top: 52px;
+        width: 166px;
+        right: -8px;
+        top: 18px;
       }
 
       .flower-left-mid {
-        width: 98px;
-        left: -18px;
-        top: 246px;
+        width: 126px;
+        left: -46px;
+        top: 208px;
       }
 
       .flower-bottom-left {
-        width: 114px;
-        left: -18px;
-        bottom: 110px;
+        width: 132px;
+        left: -20px;
+        bottom: 126px;
       }
 
       .flower-bottom-right {
-        width: 138px;
-        right: -18px;
-        bottom: 44px;
+        width: 166px;
+        right: -36px;
+        bottom: 12px;
       }
     }
 
@@ -513,85 +519,16 @@
 
   <div class="florals" aria-hidden="true">
     <div class="flower flower-top-right">
-      <svg viewBox="0 0 220 320">
-        <defs>
-          <linearGradient id="callaPetal" x1="0.1" y1="0.06" x2="0.82" y2="0.92">
-            <stop offset="0%" stop-color="#fffef9"/>
-            <stop offset="48%" stop-color="#f7f4ee"/>
-            <stop offset="100%" stop-color="#dddeda"/>
-          </linearGradient>
-          <linearGradient id="callaStem" x1="0.4" y1="0" x2="0.6" y2="1">
-            <stop offset="0%" stop-color="#a7be61"/>
-            <stop offset="100%" stop-color="#678948"/>
-          </linearGradient>
-        </defs>
-        <path d="M145 314c8-81 7-157-6-226 6-16 15-30 28-45 8 56 14 112 13 173-1 39-6 72-15 98z" fill="url(#callaStem)" opacity="0.92"/>
-        <path d="M140 34c34 6 57 27 68 63-31 5-54 18-71 39-24 28-34 62-36 102-34-35-53-71-54-110-2-52 34-90 93-94z" fill="url(#callaPetal)"/>
-        <path d="M135 35c-25 20-37 42-36 67 1 26 10 51 31 78" fill="none" stroke="rgba(185,186,179,0.65)" stroke-width="2.2"/>
-        <path d="M155 45c14 11 22 23 25 36" fill="none" stroke="rgba(188,171,121,0.4)" stroke-width="2"/>
-        <path d="M188 122c-18-1-31 4-41 14" fill="none" stroke="rgba(201,184,135,0.45)" stroke-width="1.7"/>
-      </svg>
+      <img src="assets/calla-single-cut.png" alt="">
     </div>
-
     <div class="flower flower-left-mid">
-      <svg viewBox="0 0 160 180">
-        <defs>
-          <radialGradient id="ranunculusBloom" cx="50%" cy="48%" r="52%">
-            <stop offset="0%" stop-color="#fffefb"/>
-            <stop offset="44%" stop-color="#f7f4ec"/>
-            <stop offset="100%" stop-color="#d9dbd4"/>
-          </radialGradient>
-        </defs>
-        <g opacity="0.96">
-          <circle cx="64" cy="60" r="46" fill="url(#ranunculusBloom)"/>
-          <circle cx="35" cy="118" r="30" fill="url(#ranunculusBloom)"/>
-          <path d="M64 24c-24 3-39 20-41 42 15-10 29-14 44-10-10 9-14 20-14 34 14-10 28-15 43-13-8 11-10 23-7 36 11-9 22-14 35-15-2-14 1-27 10-38-14 1-25-3-35-11 14-7 23-18 28-34-15 3-27 8-37 17-5-14-13-26-26-36z" fill="none" stroke="rgba(221,221,214,0.78)" stroke-width="1.6"/>
-          <path d="M34 96c-15 2-25 12-27 27 10-7 19-9 29-6-6 7-8 14-7 22 10-6 19-8 28-7-5 7-7 15-4 23 7-6 14-9 23-10-2-8 0-16 6-23-9 0-16-2-23-7 9-4 15-11 19-21-9 2-18 5-25 11-3-9-8-17-19-23z" fill="none" stroke="rgba(220,219,211,0.74)" stroke-width="1.4"/>
-        </g>
-      </svg>
+      <img src="assets/ranunculus-cluster-left.png" alt="">
     </div>
-
     <div class="flower flower-bottom-left">
-      <svg viewBox="0 0 200 280">
-        <defs>
-          <linearGradient id="callaPetalSmall" x1="0.15" y1="0.08" x2="0.82" y2="0.88">
-            <stop offset="0%" stop-color="#fffef9"/>
-            <stop offset="56%" stop-color="#f5f1e9"/>
-            <stop offset="100%" stop-color="#d8d8d1"/>
-          </linearGradient>
-          <linearGradient id="callaStemSmall" x1="0.4" y1="0" x2="0.7" y2="1">
-            <stop offset="0%" stop-color="#afc66b"/>
-            <stop offset="100%" stop-color="#6d9250"/>
-          </linearGradient>
-        </defs>
-        <path d="M78 274c13-72 36-138 74-194 10 46 11 89 3 129-10 28-27 49-50 65z" fill="url(#callaStemSmall)" opacity="0.92"/>
-        <path d="M102 56c31 5 54 22 67 52-28 6-48 18-62 37-20 25-30 54-35 89C43 205 27 174 26 140c-1-45 28-79 76-84z" fill="url(#callaPetalSmall)"/>
-        <path d="M95 61c-19 15-30 34-31 57 0 23 7 43 22 65" fill="none" stroke="rgba(182,184,176,0.64)" stroke-width="2"/>
-      </svg>
+      <img src="assets/calla-single-cut.png" alt="">
     </div>
-
     <div class="flower flower-bottom-right">
-      <svg viewBox="0 0 220 260">
-        <defs>
-          <radialGradient id="ranunculusLarge" cx="50%" cy="50%" r="52%">
-            <stop offset="0%" stop-color="#fffefc"/>
-            <stop offset="50%" stop-color="#f6f2ea"/>
-            <stop offset="100%" stop-color="#d8d9d2"/>
-          </radialGradient>
-          <linearGradient id="ranunculusStem" x1="0.5" y1="0" x2="0.5" y2="1">
-            <stop offset="0%" stop-color="#aec76b"/>
-            <stop offset="100%" stop-color="#739452"/>
-          </linearGradient>
-        </defs>
-        <path d="M62 256c3-45 6-88 8-130" stroke="url(#ranunculusStem)" stroke-width="5" fill="none"/>
-        <path d="M123 256c-2-54-1-103 7-145" stroke="url(#ranunculusStem)" stroke-width="5" fill="none"/>
-        <path d="M170 256c6-49 11-92 26-128" stroke="url(#ranunculusStem)" stroke-width="5" fill="none"/>
-        <circle cx="64" cy="108" r="36" fill="url(#ranunculusLarge)"/>
-        <circle cx="130" cy="90" r="48" fill="url(#ranunculusLarge)"/>
-        <circle cx="184" cy="132" r="30" fill="url(#ranunculusLarge)"/>
-        <path d="M62 79c-18 2-30 14-33 31 11-7 22-10 33-7-7 7-11 15-10 25 10-6 21-9 32-8-6 8-8 17-6 26 9-6 17-9 26-10-2-10 1-18 8-27-10 1-18-2-25-7 11-5 17-12 22-23-10 2-19 6-28 13-3-10-9-18-19-24z" fill="none" stroke="rgba(220,219,211,0.78)" stroke-width="1.4"/>
-        <path d="M130 42c-22 2-38 17-41 39 14-9 28-12 42-8-9 9-13 20-12 33 13-8 27-12 41-10-8 10-10 21-7 34 11-8 22-12 33-12-1-12 2-24 11-35-13 1-23-2-32-9 13-6 21-16 27-30-13 2-24 7-35 15-5-13-12-24-27-30z" fill="none" stroke="rgba(221,219,212,0.78)" stroke-width="1.55"/>
-      </svg>
+      <img src="assets/ranunculus-bottom.png" alt="">
     </div>
   </div>
 
