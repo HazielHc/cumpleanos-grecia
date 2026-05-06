@@ -357,6 +357,32 @@
       color: rgba(120, 133, 126, 0.76);
     }
 
+    .audio-toggle {
+      margin: 18px auto 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.34);
+      color: var(--sage-deep);
+      font-family: "Jost", sans-serif;
+      font-size: 0.92rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 28px rgba(95, 121, 104, 0.14);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      cursor: pointer;
+    }
+
+    .audio-toggle[hidden] {
+      display: none;
+    }
+
     @keyframes rise {
       to {
         opacity: 1;
@@ -641,6 +667,7 @@
       <p class="message reveal delay-6" id="dynamicMessage">Cada segundo acerca una celebración preciosa.</p>
       <div class="date-badge reveal delay-6">14 · mayo · 2026</div>
       <div class="footer-note reveal delay-6" id="footerNote">Cuenta regresiva en tiempo real</div>
+      <button class="audio-toggle reveal delay-6" id="audioToggle" type="button" hidden>Activar música</button>
     </section>
   </main>
 
@@ -735,6 +762,7 @@
       const dynamicMessage = document.getElementById("dynamicMessage");
       const footerNote = document.getElementById("footerNote");
       const backgroundAudio = document.getElementById("backgroundAudio");
+      const audioToggle = document.getElementById("audioToggle");
 
       function pad(value, size) {
         if (size === 3) {
@@ -834,30 +862,60 @@
         }
       }
 
+      function setAudioToggle(label, isVisible) {
+        if (!audioToggle) {
+          return;
+        }
+
+        audioToggle.textContent = label;
+        audioToggle.hidden = !isVisible;
+      }
+
+      async function attemptPlayback() {
+        if (!backgroundAudio) {
+          return false;
+        }
+
+        try {
+          await backgroundAudio.play();
+          setAudioToggle("Pausar música", true);
+          return true;
+        } catch (error) {
+          setAudioToggle("Tocar para escuchar música", true);
+          return false;
+        }
+      }
+
       function enableAudioPlayback() {
         if (!backgroundAudio) {
           return;
         }
 
-        const attemptPlayback = () => {
-          const playPromise = backgroundAudio.play();
+        backgroundAudio.volume = 1;
 
-          if (playPromise && typeof playPromise.catch === "function") {
-            playPromise.catch(() => {});
+        const unlockAudio = async () => {
+          const started = await attemptPlayback();
+
+          if (started) {
+            window.removeEventListener("pointerdown", unlockAudio);
+            window.removeEventListener("keydown", unlockAudio);
           }
         };
 
+        if (audioToggle) {
+          audioToggle.addEventListener("click", async () => {
+            if (backgroundAudio.paused) {
+              await attemptPlayback();
+              return;
+            }
+
+            backgroundAudio.pause();
+            setAudioToggle("Reproducir música", true);
+          });
+        }
+
         attemptPlayback();
-
-        const unlockAudio = () => {
-          attemptPlayback();
-          window.removeEventListener("click", unlockAudio);
-          window.removeEventListener("touchstart", unlockAudio);
-          window.removeEventListener("keydown", unlockAudio);
-        };
-
-        window.addEventListener("click", unlockAudio, { passive: true });
-        window.addEventListener("touchstart", unlockAudio, { passive: true });
+        window.addEventListener("pointerdown", unlockAudio, { passive: true });
         window.addEventListener("keydown", unlockAudio);
       }
 
