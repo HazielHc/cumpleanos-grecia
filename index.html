@@ -644,6 +644,10 @@
     </section>
   </main>
 
+  <audio id="backgroundAudio" autoplay loop preload="auto" playsinline>
+    <source src="background.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
     (function () {
       const timeZone = "America/Monterrey";
@@ -730,6 +734,7 @@
       const progressPercent = document.getElementById("progressPercent");
       const dynamicMessage = document.getElementById("dynamicMessage");
       const footerNote = document.getElementById("footerNote");
+      const backgroundAudio = document.getElementById("backgroundAudio");
 
       function pad(value, size) {
         if (size === 3) {
@@ -829,7 +834,35 @@
         }
       }
 
+      function enableAudioPlayback() {
+        if (!backgroundAudio) {
+          return;
+        }
+
+        const attemptPlayback = () => {
+          const playPromise = backgroundAudio.play();
+
+          if (playPromise && typeof playPromise.catch === "function") {
+            playPromise.catch(() => {});
+          }
+        };
+
+        attemptPlayback();
+
+        const unlockAudio = () => {
+          attemptPlayback();
+          window.removeEventListener("click", unlockAudio);
+          window.removeEventListener("touchstart", unlockAudio);
+          window.removeEventListener("keydown", unlockAudio);
+        };
+
+        window.addEventListener("click", unlockAudio, { passive: true });
+        window.addEventListener("touchstart", unlockAudio, { passive: true });
+        window.addEventListener("keydown", unlockAudio);
+      }
+
       updateCountdown();
+      enableAudioPlayback();
       setInterval(updateCountdown, 1000);
     })();
   </script>
