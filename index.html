@@ -778,13 +778,13 @@
           return {
             main: "¡Feliz cumpleaños, Grecia!",
             progress: "",
-            footer: "Hoy se celebra en grande"
+            footer: "Hoy nacio papoooi!! Muchas Felicidades Grecia, disfruta mucho mucho tu dia y Dios te siga bendiciendo hoy y siempre, te quiero mucho!! 🥳🎉🎂🎁🎈"
           };
         }
 
         if (totalDays <= 1) {
           return {
-            main: "¡Ya falta muy poco!",
+            main: "¡Ya falta muy poquitoo, muy poquitoo!",
             progress: "",
             footer: "Cuenta regresiva final"
           };
@@ -792,7 +792,7 @@
 
         if (totalDays <= 7) {
           return {
-            main: "La celebración está a la vuelta de la esquina.",
+            main: "Tu cumpleaños ya esta casi casi aquii, Que emocion!!.",
             progress: "",
             footer: "Queda menos de una semana"
           };
@@ -850,7 +850,7 @@
         const message = getMessage(distance);
         dynamicMessage.textContent = message.main;
         progressText.textContent = message.progress;
-        footerNote.textContent = message.footer + " · Hora de Monclova, Coahuila";
+        footerNote.textContent = message.footer + "";
 
         if (distance <= 0) {
           parts.days.textContent = "0";
@@ -881,7 +881,7 @@
           setAudioToggle("Pausar música", true);
           return true;
         } catch (error) {
-          setAudioToggle("Tocar para escuchar música", true);
+          setAudioToggle("Tocar para escuchar una sorpresa", true);
           return false;
         }
       }
